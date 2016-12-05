@@ -36,7 +36,3 @@ The script also targets sub-folders by running recursively through them all.
 * Add linting
 * Add Example
 
-
-
-
-      
