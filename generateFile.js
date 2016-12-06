@@ -8,11 +8,19 @@ const generateFile = (filePath, filename, startPath) => {
             .then(({isReactFile, filePath}) => {
                 if (isReactFile) {
                     const testPath = `${startPath}/__tests__`;
-                    findTestFolder(testPath);
                     const testFileName = `${filename.replace(/\.[^/.]+$/, "")}-test.js`
                     const fileContent = createJestFile.createJestTest(filename);
-                    createTestFile(`${testPath}/${testFileName}`, fileContent);
-                    resolve();
+
+                    resolve(
+                        findTestFolder(testPath)
+                            .then(() => (
+                                createTestFile(`${testPath}/${testFileName}`, fileContent)
+                            )
+                            )
+                    );
+
+                } else {
+                    resolve(0);
                 }
             })
             .catch(reject);
@@ -20,46 +28,58 @@ const generateFile = (filePath, filename, startPath) => {
 }
 
 
-
 function createTestFile(filename, content) {
-    fs.open(filename, 'r', function (err, fd) {
-        if (err) {
-            fs.writeFile(filename, content, function (err) {
-                if (err) {
-                    console.log(err);
-                }
-            });
-        } else {
-            console.log("The file exists!");
-        }
+    return new Promise((resolve, reject) => {
+        fs.open(filename, 'r', function (err, fd) {
+            if (err) {
+                fs.writeFile(filename, content, function (err) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(1);
+                    }
+                });
+            } else {
+                // console.log("The file exists!");
+                resolve(0);
+            }
+        });
     });
+
 }
 
 function findTestFolder(path) {
-    mkdirp(path, function (err) {
-        if (err) {
-            console.error(err);
-        } else {
-            console.log(`created test folder: ${path}`);
-        }
-    });
+    return new Promise((resolve, reject) => {
+        mkdirp(path, function (err) {
+            if (err) {
+                reject(err);
+            } else {
+                // console.log(`created test folder: ${path}`);
+                resolve();
+            }
+        });
+    })
 }
 
 
 function checkIfReactFile(filePath) {
-    if (filePath.indexOf('-test.js') > 0) {
+    if (filePath.indexOf('-test.js') > 0) { // Don't generate files for test files
         return Promise.resolve(false);
     }
 
     return new Promise((resolve, reject) => {
         fs.readFile(`./${filePath}`, function (err1, data) {
             if (err1) {
+                console.log('sapdap', filePath);
+
                 console.error(err1);
                 reject();
             } else {
+                console.log('sapdap', filePath);
+
                 const res = {
                     filePath,
-                    isReactFile: func(data)
+                    isReactFile: isReactFile(data)
                 };
                 resolve(res);
             }
@@ -68,11 +88,9 @@ function checkIfReactFile(filePath) {
 }
 
 
-function func(data) {
-
-    console.log(data.indexOf('import React'), ' sap');
-
-
+function isReactFile(data) {
+    console.log('data', data);
+    
     // naive way of trying to check if the file contains jsx
     if (data.indexOf('import React') >= 0) {
         return true;
