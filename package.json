@@ -1,17 +1,23 @@
 {
-  "name": "painless-snapshot-testing",
+  "name": "jest-snapshot-get-started",
   "version": "1.0.0",
-  "description": "",
+  "description": "Automatically generate snapshot files for your project React / React-native projects",
   "main": "findFolders.js",
   "scripts": {
-    "build": "babel findFolders.js -o compiled.js"
+    "build": "babel findFolders.js -o compiled.js",
+    "test": "mocha",
+    "test:watch": "mocha --watch"
   },
-  "author": "",
-  "license": "ISC",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "author": "“Truls <“trulsske@gmail.com”>",
+  "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",
     "babel-preset-es2015": "^6.18.0",
+    "del": "^2.2.2",
     "expect": "^1.20.2",
     "mocha": "^3.2.0"
   },
@@ -19,5 +25,22 @@
     "mkdirp": "^0.5.1",
     "react": "^15.4.1",
     "react-native": "^0.39.0"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skeie/jest-snapshot-starter.git"
+  },
+  "keywords": [
+    "jest",
+    "javascript",
+    "react",
+    "test"
+  ],
+  "bugs": {
+    "url": "https://github.com/skeie/jest-snapshot-starter/issues"
+  },
+  "homepage": "https://github.com/skeie/jest-snapshot-starter#readme"
 }

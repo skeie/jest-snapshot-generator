@@ -19,7 +19,7 @@ function fromDir(startPath, fileExt) {
                 return fromDir(filePath, fileExt); //recurse
             }
             else if (filename.indexOf(fileExt) >= 0) {
-                return generateFile(filePath, filename, startPath)
+                return generateFile(`./${filePath}`, filename, startPath)
                     .then((numberOfCreatedFiles) => counter = counter + numberOfCreatedFiles);
             } else {
                 return Promise.resolve();

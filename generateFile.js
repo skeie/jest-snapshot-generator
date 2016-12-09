@@ -40,7 +40,7 @@ function createTestFile(filename, content) {
                     }
                 });
             } else {
-                // console.log("The file exists!");
+                console.log("The file exists!", filename);
                 resolve(0);
             }
         });
@@ -68,15 +68,11 @@ function checkIfReactFile(filePath) {
     }
 
     return new Promise((resolve, reject) => {
-        fs.readFile(`./${filePath}`, function (err1, data) {
+        fs.readFile(filePath, function (err1, data) {
             if (err1) {
-                console.log('sapdap', filePath);
-
                 console.error(err1);
                 reject();
             } else {
-                console.log('sapdap', filePath);
-
                 const res = {
                     filePath,
                     isReactFile: isReactFile(data)
@@ -89,17 +85,16 @@ function checkIfReactFile(filePath) {
 
 
 function isReactFile(data) {
-    console.log('data', data);
-    
-    // naive way of trying to check if the file contains jsx
-    if (data.indexOf('import React') >= 0) {
+
+    // naive way of trying to check if the file is a React comp
+    if (data.indexOf(`require('react')`) >= 0 || data.indexOf(`from 'react'`) >= 0 ) {
         return true;
     } else {
         return false;
     }
-
-
 }
+
+
 
 
 module.exports = { generateFile };

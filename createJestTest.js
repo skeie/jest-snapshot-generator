@@ -5,9 +5,9 @@ function createJestTest(filename) {
 `import React from 'react';
 import renderer from 'react-test-renderer';
 import ${readableFilename} from '../${readableFilename}';
-test('Should render ${fileWithOutExt} correctly', () => {
+test('Should render ${readableFilename} correctly', () => {
     const tree = renderer.create(
-        <${fileWithOutExt} /> 
+        <${readableFilename} /> 
     ).toJSON();
     expect(tree).toMatchSnapshot();
 });
