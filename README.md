@@ -1,11 +1,13 @@
-# A jest snapshot script
+# A jest snapshot generator script
+This script runs through all of the files in a given path and creates a `/__tests__` folder containing jest snapshots if it thinks the file is a react component. It works with both React and React-native
 
 ## Installation
-
-### This script runs through all of the files in a given path and creates a `/__tests__` folder containg jest snapshots if it thinks the files is a react component. It works with both React and React-native
+This script runs through all of the files in a given path and creates a `/__tests__` folder containg jest snapshots if it thinks the files is a react component. It works with both React and React-native
 
 ## use
 `jest-snapshot-generate [your top - level react folder] [file extension, .js by default]`
+
+If a file named `yourComponent-test.js` exists in your __tests__ folder, the script will not do anything, just move along to the next file. 
 
 ## Output
 
@@ -36,10 +38,4 @@ The script also targets sub-folders by running recursively through them all.
 `npm test`
 
 ## Contributing
-
-
-
-## TODO
-* Add linting
-* Add Example
-
+Feel free to improve :-)

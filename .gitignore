@@ -1,8 +1,4 @@
 #node
 node_modules/
 npm-debug.log
-
-
-
-
-td-callcall-new/
+.DS_Store
