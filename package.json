@@ -1,6 +1,6 @@
 {
   "name": "jest-snapshot-get-started",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Automatically generate snapshot files for your project React / React-native projects",
   "main": "findFolders.js",
   "scripts": {
@@ -30,7 +30,7 @@
     "url": "git+https://github.com/skeie/jest-snapshot-starter.git"
   },
   "bin": {
-    "jest-snapshot-generate" : "./index.js"
+    "jest-snapshot-generate": "./index.js"
   },
   "keywords": [
     "jest",
